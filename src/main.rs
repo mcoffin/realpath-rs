@@ -22,9 +22,13 @@ fn print_usage(invocation: &str, opts: &[getopts::OptGroup]) {
         getopts::usage(short.as_slice(), opts));
 }
 
-fn print_results<T: iter::Iterator<Path>>(mut iter: T) {
+fn print_results<T: iter::Iterator<Path>>(mut iter: T, zero_sep: bool) {
     for path in iter {
-        println!("{}", path.display());
+        if zero_sep {
+            print!("{}\0", path.display());
+        } else {
+            println!("{}", path.display());
+        }
     }
 }
 
@@ -37,6 +41,7 @@ fn main() {
         optflag("h", "help", "print usage info then exit"),
         optflag("v", "version", "print version info then exit"),
         optflag("s", "strip", "don't expand symlinks"),
+        optflag("z", "zero", "print zero separators instead of newlines")
     ];
     let matches = match getopts(args.tail(), opts) {
         Ok(m) => { m }
@@ -66,6 +71,8 @@ fn main() {
         os::make_absolute(&rel)
     });
 
+    let zero_opt = matches.opt_present("z");
+
     // If a symlink follow is desired, map it
     if !matches.opt_present("s") {
         let sym_iter = iter.map(|p| {
@@ -74,8 +81,8 @@ fn main() {
                 Err(e) => { panic!(format!("{}", e)) }
             }
         });
-        print_results(sym_iter);
+        print_results(sym_iter, zero_opt);
     } else {
-        print_results(iter);
+        print_results(iter, zero_opt);
     }
 }
