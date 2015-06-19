@@ -4,6 +4,9 @@ name = "realpath"
 version = "0.0.1"
 authors = ["Matt Coffin <mcoffin13@gmail.com>"]
 
+[dependencies]
+getopts = "*"
+
 [[bin]]
 
 name = "realpath"
