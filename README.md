@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/mcoffin/realpath-rs.png?label=ready&title=Ready)](https://waffle.io/mcoffin/realpath-rs)
 # realpath-rs
 
 [![Build Status](https://travis-ci.org/mcoffin/realpath-rs.svg?branch=master)](https://travis-ci.org/mcoffin/realpath-rs) [![Stories in Ready](https://badge.waffle.io/mcoffin/realpath-rs.png?label=ready&title=Ready)](https://waffle.io/mcoffin/realpath-rs)
